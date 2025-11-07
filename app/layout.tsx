@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { Toaster } from "react-hot-toast";
+import "@stream-io/video-react-sdk/dist/css/styles.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +18,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Yoom",
-  icons: "/icons/logo.svg" ,
+  icons: "/icons/logo.svg",
   description: "Yoom",
 };
 
@@ -53,6 +55,7 @@ export default function RootLayout({
           className={`${geistSans.variable} bg-dark-2 ${geistMono.variable} antialiased`}
         >
           {children}
+          <Toaster />
         </body>
       </ClerkProvider>
     </html>

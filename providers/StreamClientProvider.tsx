@@ -1,46 +1,42 @@
-import { tokenProvider } from "@/actions/strem.actions";
-import Loader from "@/components/Loader";
-import { useUser } from "@clerk/nextjs";
-import {
-	StreamVideo,
-	StreamVideoClient,
-} from "@stream-io/video-react-sdk";
+'use client';
 
-import dotenv from "dotenv";
-import { ReactNode, useEffect, useState } from "react";
-dotenv.config();
+import { ReactNode, startTransition, useEffect, useState } from 'react';
+import { StreamVideoClient, StreamVideo } from '@stream-io/video-react-sdk';
+import { useUser } from '@clerk/nextjs';
 
 
 
-const apiKey = process.env.NEXT_PUBLIC_STREAM_API_KEY;
+import Loader from '@/components/Loader';
+import { tokenProvider } from '@/actions/stream.actions';
 
-const StreamVideoProvider = (
-	{ children }: { children: ReactNode }
-) => {
-	const [videoClient, setVideoClient] = useState<StreamVideoClient>();
-	const { user, isLoaded } = useUser();
+const API_KEY = process.env.NEXT_PUBLIC_STREAM_API_KEY;
 
-	useEffect(() => {
-		if (!user || !isLoaded) return;
-		if (!apiKey) throw new Error("Stream APIKey ")
-		const client = new StreamVideoClient({
-			apiKey,
-			user: {
-				id: user?.id,
-				name: user?.username || user?.id,
-				image: user?.imageUrl
-			},
-			tokenProvider
-		});
-		setVideoClient(client);
-    return client.disconnectUser(); 
-	}, [user, isLoaded]);
-	if (!videoClient) <Loader />
-	return (
-		<StreamVideo client={videoClient}>
-			{children}
-		</StreamVideo>
-	);
+const StreamVideoProvider = ({ children }: { children: ReactNode }) => {
+  const [videoClient, setVideoClient] = useState<StreamVideoClient>();
+  const { user, isLoaded } = useUser();
+
+  useEffect(() => {
+    if (!isLoaded || !user) return;
+    if (!API_KEY) throw new Error('Stream API key is missing');
+
+    const client = new StreamVideoClient({
+      apiKey: API_KEY,
+      user: {
+        id: user?.id,
+        name: user?.username || user?.id,
+        image: user?.imageUrl,
+      },
+      tokenProvider,
+    });
+    startTransition(() => {
+      setVideoClient(client);
+    })
+
+  }, [user, isLoaded]);
+
+  if (!videoClient) return <Loader />;
+
+  return <StreamVideo client={videoClient}>{children}</StreamVideo>;
 };
 
-export default StreamVideoProvider
+export default StreamVideoProvider;

@@ -6,14 +6,13 @@ interface HomeCardTypes {
 	imgURL: string,
 	title: string,
 	text: string,
-	handelClick?: () => void,
+	handleClick?: () => void,
 	color?: string
 }
 
-
-const HomeCard = ({ imgURL, title, text, handelClick, color }: HomeCardTypes) => {
+const HomeCard = ({ imgURL, title, text, handleClick, color }: HomeCardTypes) => {
 	return (
-		<div className={cn(" px-4 py-6 flex flex-col justify-between xl:max-w-[270px]  min-h-[260px] rounded-[14px] cursor-pointer", color)} onClick={handelClick}>
+		<div className={cn(" px-4 py-6 flex flex-col justify-between xl:max-w-[270px]  min-h-[260px] rounded-[14px] cursor-pointer", color)} onClick={handleClick}>
 			<div className="flex justify-center items-center glassmorphism size-12 rounded-[10px] ">
 				<Image src={imgURL} alt="meeting" width={27} height={27} />
 			</div>

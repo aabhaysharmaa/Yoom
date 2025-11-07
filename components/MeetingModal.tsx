@@ -20,10 +20,11 @@ interface MeetingModalProps {
 	children: React.ReactNode,
 	handleClick: () => void;
 	image?: string
-	className: string
+	className: string,
+	isLoading: boolean
 }
 
-const MeetingModal = ({ isOpen, title, buttonIcon, image, buttonText, onClose, children, handleClick, className }: MeetingModalProps) => {
+const MeetingModal = ({ isOpen, title, buttonIcon, image, buttonText, onClose, children, handleClick, isLoading, className }: MeetingModalProps) => {
 	return (
 		<Dialog open={isOpen} onOpenChange={onClose} >
 			<DialogTitle></DialogTitle>
@@ -36,11 +37,15 @@ const MeetingModal = ({ isOpen, title, buttonIcon, image, buttonText, onClose, c
 					}
 					<h1 className={cn("font-extrabold text-3xl leading-[42px]", className)}>{title}</h1>
 					{children}
-					<Button className='bg-blue-1 focus:visible:ring-0 focus-visible:ring-offset-0 ' onClick={handleClick}>
-						{buttonIcon && (
-							<Image src={buttonIcon} alt='buttonIcon' width={15} height={15} />
-						)} &nbsp;
-						{buttonText || "Schedule Meeting"}
+					<Button className='bg-blue-1  cursor-pointer hover:bg-blue-1 ' onClick={handleClick}>
+						{isLoading ? ("Loading...") : (
+							<span className="flex items-center gap-2">
+								{buttonIcon && (
+									<Image src={buttonIcon} alt="button icon" width={15} height={15} />
+								)}
+								{buttonText || "Schedule Meeting"}
+							</span>
+						)}
 					</Button>
 				</div>
 			</DialogContent>

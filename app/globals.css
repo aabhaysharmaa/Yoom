@@ -13,7 +13,9 @@
   --color-purple-1: #0E78F9 ;
   --color-purple-2: #830EF9;
 }
-
+/* .str-video__participant-list {
+  display: none !important;
+} */
 .bg-hero {
   background-image:url("/images/hero-background.png")
 }
