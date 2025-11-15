@@ -1,11 +1,10 @@
 import React from 'react';
 
-
 import {
 	Dialog,
 	DialogContent,
 	DialogTitle,
-} from "@/components/ui/dialog"
+} from "@/components/ui/dialog";
 
 import Image from 'next/image';
 import { cn } from '@/lib/utils';
@@ -16,12 +15,12 @@ interface MeetingModalProps {
 	onClose: () => void,
 	title: string,
 	buttonIcon?: string,
-	buttonText: string
+	buttonText?: string
 	children: React.ReactNode,
 	handleClick: () => void;
 	image?: string
 	className: string,
-	isLoading: boolean
+	isLoading?: boolean
 }
 
 const MeetingModal = ({ isOpen, title, buttonIcon, image, buttonText, onClose, children, handleClick, isLoading, className }: MeetingModalProps) => {

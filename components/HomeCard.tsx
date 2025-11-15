@@ -1,7 +1,5 @@
-import { cn } from '@/lib/utils';
-import Image from 'next/image'
-
-
+import { cn } from '@/lib/utils'; 
+import Image from 'next/image';
 interface HomeCardTypes {
 	imgURL: string,
 	title: string,

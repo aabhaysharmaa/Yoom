@@ -5,7 +5,6 @@ import React from 'react'
 import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
 import toast from 'react-hot-toast';
-
 const EndCallButton = () => {
 	const call = useCall();
 	const router = useRouter();
@@ -13,9 +12,9 @@ const EndCallButton = () => {
 	const localParticipant = useLocalParticipant();
 
 	const isMeetingOwner = localParticipant && call?.state.createdBy && localParticipant.userId === call.state.createdBy.id;
-	if (!isMeetingOwner) return null;
+	if (!isMeetingOwner) return null ;
 	return (
-		<Button className='bg-red-500 cursor-pointer'  onClick={async () => {
+		<Button className='bg-red-500 cursor-pointer' onClick={async () => {
 			await call.endCall();
 			router.push("/")
 			toast.success("Call Ended")
@@ -24,3 +23,6 @@ const EndCallButton = () => {
 }
 
 export default EndCallButton
+
+
+

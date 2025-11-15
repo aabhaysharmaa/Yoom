@@ -5,8 +5,7 @@ import React from 'react';
 
 const SignInPage = () => {
 	return (
-		<main className='flex h-screen
-		 justify-center items-center w-full'>
+		<main className='flex justify-between items-center w-full h-full'>
 			<SignIn />
 		</main>
 	)

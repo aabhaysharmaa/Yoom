@@ -5,7 +5,7 @@ import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { Toaster } from "react-hot-toast";
 import "@stream-io/video-react-sdk/dist/css/styles.css";
-
+import 'react-datepicker/dist/react-datepicker.css';
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -35,10 +35,6 @@ export default function RootLayout({
           socialButtonsVariant: "iconButton",
 
         }, elements: {
-          socialButtonsProviderIcon__google: {
-            width: "28px",
-            height: "28px",
-          },
           socialButtonsProviderName: {
             display: "none",
           },
